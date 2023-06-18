@@ -8,15 +8,37 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		README.md = README.md
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Clients", "Clients", "{B1CA5250-7727-4D42-BF15-5D0C701545DE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorClientStd", "Clients\BlazorClientStd\BlazorClientStd.csproj", "{5189D804-6537-4DBC-9D72-62647CF70934}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{078BF27E-E379-4EFE-AF49-3DD7EE04EE3F}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "ListManager.Models", "Data\ListManager.Models\ListManager.Models.shproj", "{87E08CFB-BA83-4F5A-B054-C4DA6FA43031}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5189D804-6537-4DBC-9D72-62647CF70934}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5189D804-6537-4DBC-9D72-62647CF70934}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5189D804-6537-4DBC-9D72-62647CF70934}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5189D804-6537-4DBC-9D72-62647CF70934}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{5189D804-6537-4DBC-9D72-62647CF70934} = {B1CA5250-7727-4D42-BF15-5D0C701545DE}
+		{87E08CFB-BA83-4F5A-B054-C4DA6FA43031} = {078BF27E-E379-4EFE-AF49-3DD7EE04EE3F}
+	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {F098C40C-8A6B-4571-BF44-0FC516774E0D}
+	EndGlobalSection
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		Data\ListManager.Models\ListManager.Models.projitems*{5189d804-6537-4dbc-9d72-62647cf70934}*SharedItemsImports = 5
+		Data\ListManager.Models\ListManager.Models.projitems*{87e08cfb-ba83-4f5a-b054-c4da6fa43031}*SharedItemsImports = 13
 	EndGlobalSection
 EndGlobal
