@@ -1,4 +1,17 @@
 ﻿@page "/"
 @inject IConfiguration Configuration
-<h1>@Configuration["app:name"]</h1>
+<h1>
+	@Configuration["app:name"]
+</h1><small>@GetType().Assembly.GetName().Version</small>
+
 <p>@Configuration["app:description"]</p>
+<button class="info" @onclick="Clicked">Learn More</button>
+<button class="action" @onclick="Clicked">Get Started</button>
+
+@clicked
+@code {
+	int clicked;
+	void Clicked() {
+		clicked++;
+	}
+}

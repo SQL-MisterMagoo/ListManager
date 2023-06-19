@@ -2,26 +2,71 @@
 <html lang="en">
 
 <head>
-    <meta charset="utf-8" />
-    <title>BlazorClientStd</title>
-    <base href="/" />
-    <link href="css/app.css" rel="stylesheet" />
-    <link href="manifest.webmanifest" rel="manifest" />
-    
-    <!-- If you add any scoped CSS files, uncomment the following to load them
-    <link href="BlazorClientStd.styles.css" rel="stylesheet" /> -->
+	<meta charset="utf-8" />
+	<title>BlazorClientStd</title>
+	<base href="/" />
+	<link href="css/app.css" rel="stylesheet" />
+	<link href="manifest.webmanifest" rel="manifest" />
+
+	<!-- If you add any scoped CSS files, uncomment the following to load them
+	<link href="BlazorClientStd.styles.css" rel="stylesheet" /> -->
 </head>
 
 <body>
-    <div id="app">Loading...</div>
+	<div id="app">
+		<main>
+			<h1 tabindex="-1">blistr</h1>
+			<small>1.0.0.0</small>
 
-    <div id="blazor-error-ui">
-        An unhandled error has occurred.
-        <a href="" class="reload">Reload</a>
-        <a class="dismiss">🗙</a>
-    </div>
-    <script src="_framework/blazor.webassembly.js"></script>
-    <script>navigator.serviceWorker.register('service-worker.js');</script>
+			<p>A simple list manager using Blazor and Azure</p>
+			<button class="info">Learn More</button>
+			<button class="action">Get Started</button>
+		</main>
+		<footer>
+			©️ 2023 Mister Magoo - All Rights Reserved. Browser Wasm .NET 8.0.0-preview.5.23280.8
+		</footer>
+	</div>
+
+	<div id="blazor-error-ui">
+		An unhandled error has occurred.
+		<a href="" class="reload">Reload</a>
+		<a class="dismiss">🗙</a>
+	</div>
+	<script src="_framework/blazor.webassembly.js" autostart="false"></script>
+	<script>navigator.serviceWorker.register('service-worker.js');</script>
+	<script>
+
+		// use afterStarted in a module instead
+		const buttons = document.querySelectorAll('button');
+		const clicks = [];
+
+		buttons.forEach(function (btn) { btn.addEventListener('click', buttonClick) })
+		document.addEventListener("DOMContentLoaded", () => { setTimeout(StartBlazor, 1000)	});
+
+		function buttonClick(e) {
+			const btn = e.target
+			btn.removeEventListener(e.type, buttonClick)
+			console.log("Button clicked", btn)
+			clicks.push({ btn, e })
+			StartBlazor()
+		}
+
+		function StartBlazor() {
+			Blazor
+				.start()
+				.catch((error) => { console.error(error) })
+				.finally(() => {
+					setTimeout(function () {
+						clicks.forEach((click) => {
+							const newClick = new MouseEvent(click.e.type, click.e)
+							const newBtn = document.querySelector('button[class="'+click.btn.classList[0]+'"]')
+							console.log("Dispatching click", newBtn, newClick)
+							newBtn.dispatchEvent(newClick)
+						})
+					}, 50)
+				})
+		}
+	</script>
 </body>
 
 </html>
