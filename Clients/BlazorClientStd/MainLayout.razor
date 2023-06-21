@@ -1,4 +1,6 @@
 ﻿@inherits LayoutComponentBase
+@inject IConfiguration Configuration
+<PageTitle>📃 @Configuration["app:name"]</PageTitle>
 
 <main>
     @Body

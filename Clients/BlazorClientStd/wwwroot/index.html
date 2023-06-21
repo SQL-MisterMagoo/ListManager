@@ -3,11 +3,13 @@
 
 <head>
 	<meta charset="utf-8" />
-	<title>BlazorClientStd</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta name="description" content="App using Blazor and Azure that works offline or online and stores your data locally with an option to save to the cloud." />
+	<title>📃blistr.app</title>
 	<base href="/" />
 	<link href="css/app.css" rel="stylesheet" />
 	<link href="manifest.webmanifest" rel="manifest" />
-
+	<script src="scripts/blistr.loading.js"></script>
 	<!-- If you add any scoped CSS files, uncomment the following to load them
 	<link href="BlazorClientStd.styles.css" rel="stylesheet" /> -->
 </head>
@@ -16,11 +18,20 @@
 	<div id="app">
 		<main>
 			<h1 tabindex="-1">blistr</h1>
-			<small>1.0.0.0</small>
 
-			<p>A simple list manager using Blazor and Azure</p>
-			<button class="info">Learn More</button>
-			<button class="action">Get Started</button>
+			<h2>Blazor List Manager</h2>
+			<article class="start-blazor">
+				<p>
+					This is a fast, responsive <a href="https://blazor.net">Blazor</a> app hosted on Azure Static Web Apps.
+					It demonstrates techniques for fast loading, responsive UI, and offline support.
+					You can view the PageSpeed Insights report here: <a href="https://developers.google.com/speed/pagespeed/insights/?url=https%3A%2F%2Fblistr.app%2F&tab=mobile">PageSpeed Insights</a>.
+					The source code is open source and available on <a href="https://github.com/SQL-MisterMagoo/ListManager">GitHub</a>.
+				</p>
+				<form>
+					<label for="userid">Choose a name </label><input id="userid" type="text" autofocus class="start-blazor" />
+					<button id="btnStart" class="action">Start</button>
+				</form>
+			</article>
 		</main>
 		<footer>
 			©️ 2023 Mister Magoo - All Rights Reserved. Browser Wasm .NET 8.0.0-preview.5.23280.8
@@ -29,44 +40,11 @@
 
 	<div id="blazor-error-ui">
 		An unhandled error has occurred.
-		<a href="" class="reload">Reload</a>
-		<a class="dismiss">🗙</a>
+		<a href="#" class="reload">Reload</a>
+		<a href="#" class="dismiss">🗙</a>
 	</div>
-	<script src="_framework/blazor.webassembly.js" autostart="false"></script>
-	<script>navigator.serviceWorker.register('service-worker.js');</script>
-	<script>
 
-		// use afterStarted in a module instead
-		const buttons = document.querySelectorAll('button');
-		const clicks = [];
-
-		buttons.forEach(function (btn) { btn.addEventListener('click', buttonClick) })
-		document.addEventListener("DOMContentLoaded", () => { setTimeout(StartBlazor, 1000)	});
-
-		function buttonClick(e) {
-			const btn = e.target
-			btn.removeEventListener(e.type, buttonClick)
-			console.log("Button clicked", btn)
-			clicks.push({ btn, e })
-			StartBlazor()
-		}
-
-		function StartBlazor() {
-			Blazor
-				.start()
-				.catch((error) => { console.error(error) })
-				.finally(() => {
-					setTimeout(function () {
-						clicks.forEach((click) => {
-							const newClick = new MouseEvent(click.e.type, click.e)
-							const newBtn = document.querySelector('button[class="'+click.btn.classList[0]+'"]')
-							console.log("Dispatching click", newBtn, newClick)
-							newBtn.dispatchEvent(newClick)
-						})
-					}, 50)
-				})
-		}
-	</script>
+	<script src="_framework/blazor.webassembly.js" autostart="false" async="async"></script>
+	<script async="async">navigator.serviceWorker.register('service-worker.js');</script>
 </body>
-
 </html>

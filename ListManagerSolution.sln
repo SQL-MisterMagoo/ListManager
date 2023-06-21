@@ -10,7 +10,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Clients", "Clients", "{B1CA5250-7727-4D42-BF15-5D0C701545DE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorClientStd", "Clients\BlazorClientStd\BlazorClientStd.csproj", "{5189D804-6537-4DBC-9D72-62647CF70934}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorClientStd", "Clients\BlazorClientStd\BlazorClientStd.csproj", "{5189D804-6537-4DBC-9D72-62647CF70934}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{078BF27E-E379-4EFE-AF49-3DD7EE04EE3F}"
 EndProject

@@ -1,17 +1,40 @@
 ﻿@page "/"
+@inject IJSRuntime JS
 @inject IConfiguration Configuration
 <h1>
 	@Configuration["app:name"]
-</h1><small>@GetType().Assembly.GetName().Version</small>
+</h1>
 
-<p>@Configuration["app:description"]</p>
-<button class="info" @onclick="Clicked">Learn More</button>
-<button class="action" @onclick="Clicked">Get Started</button>
+<h2>@Configuration["app:description"]</h2>
+<article>
+	<p>
+		This is a fast, responsive <a href="https://blazor.net">Blazor</a> app hosted on Azure Static Web Apps.
+		It demonstrates techniques for fast loading, responsive UI, and offline support.
+		You can view the PageSpeed Insights report here: <a href="https://developers.google.com/speed/pagespeed/insights/?url=https%3A%2F%2Fblistr.app%2F&tab=mobile">PageSpeed Insights</a>.
+		The source code is open source and available on <a href="https://github.com/SQL-MisterMagoo/ListManager">GitHub</a>.
+	</p>
+	<form>
+		<label for="userid">Choose a name </label><input id="userid" type="text" @bind=value autofocus class="start-blazor" />
+		<button id="btnStart" class="action" @onclick="Clicked">Start</button>
+	</form>
+</article>
 
-@clicked
 @code {
-	int clicked;
-	void Clicked() {
-		clicked++;
+	string value;
+	void Clicked()
+	{
+		if (JS is IJSInProcessRuntime jSIn)
+		{
+			jSIn.InvokeVoid("alert", $"Hello {value}");
+		}
+	}
+	protected override void OnAfterRender(bool firstRender)
+	{
+		if (firstRender && JS is IJSInProcessRuntime jSIn)
+		{
+			value = jSIn.Invoke<string>("localStorage.getItem", "userid");
+			jSIn.InvokeVoid("localStorage.setItem", "userid", "");
+			StateHasChanged();
+		}
 	}
 }
