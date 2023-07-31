@@ -1,0 +1,70 @@
+﻿@page "/ListEdit/{ListId}"
+@using ListManager.Models.Lists
+@using ListManager.Providers
+@inject IListProviderAsync MyListProvider
+
+<form @onsubmit=AddNewItem>
+	<label for="listid">List Name</label><input id="listid" type="text" @bind=@listName />
+	<label for="newitem">Add Item</label><input @ref=InputDescription id="newitem" type="text" @bind=@description />
+	<button type=submit>Add</button>
+</form>
+
+@if (list is IListOfItems validList && validList.ListItems is List<IListItem> listItems)
+{
+	foreach (var item in listItems.OrderBy(i => i.ListPosition))
+	{
+		<div @key=item.ItemId role="listitem">
+			<span class="list-position">@item.ListPosition</span>
+			<span class="list-text">@item.Description</span>
+			<div class="list-controls">
+				<button @onclick=@(()=>MyListProvider.MoveUp(validList,item.ListPosition))>👆🏼</button>
+				<button @onclick=@(()=>MyListProvider.MoveDown(validList,item.ListPosition))>👇🏼</button>
+			</div>
+		</div>
+	}
+}
+@code {
+	[Parameter] public required string? ListId { get; set; }
+
+	string listName,description;
+	IListOfItems? list;
+	ElementReference InputDescription;
+
+	async Task AddNewItem()
+	{
+		if (string.IsNullOrWhiteSpace(description))
+			return;
+
+		if (list is null)
+		{
+			list = await MyListProvider.CreateList(listName);
+		}
+		var newItem = await MyListProvider.CreateListItem(list.ListId, description);
+		description = string.Empty;
+		await InputDescription.FocusAsync();
+	}
+	protected override async Task OnParametersSetAsync()
+	{
+		await base.OnParametersSetAsync();
+
+		if (MyListProvider is null)
+			return;
+
+		if (ListId != "new")
+		{
+			var _lists = await MyListProvider.GetLists();
+			Console.WriteLine($"Lists: {_lists.Count}");
+			list = _lists
+						.Where(lst => lst.ListId == ListId)
+						.FirstOrDefault();
+			Console.WriteLine($"List Items: {list?.ListItems?.Count}");
+		}
+		listName = list?.ListId ?? string.Empty;
+		int pos = 1;
+		foreach (var item in list.ListItems.OrderBy(i=>i.ListPosition))
+		{
+			pos = list.ListItems.Max(i=>i.ListPosition)+1;
+			item.ListPosition = item.ListPosition == 0 ? pos : item.ListPosition;
+		}
+	}
+}

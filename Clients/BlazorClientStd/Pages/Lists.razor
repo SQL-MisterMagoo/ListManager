@@ -1,0 +1,40 @@
+﻿@page "/lists"
+@using ListManager.Models.Lists
+@using ListManager.Providers
+@inject IListProviderAsync MyListProvider
+<h2>Lists</h2>
+
+@if (_lists is List<IListOfItems> listOfLists && listOfLists.Any())
+{
+	<p>You have @listOfLists.Count lists.</p>
+	<div class="card-holder">
+		@foreach (var list in listOfLists)
+		{
+			<article>
+				<a href="/ListEdit/@list.ListId">
+					<h3>@list.ListId</h3>
+					@if (list.ListItems is List<IListItem> listItems)
+					{
+						@foreach (var item in listItems.OrderBy(i => i.ListPosition).Take(2))
+						{
+							<p>@item.ListPosition - @item.Description</p>
+						}
+					}
+				</a>
+			</article>
+		}
+	</div>
+}
+else
+{
+	<a href="/ListEdit/new">Create a new list</a>
+}
+
+@code {
+	List<IListOfItems>? _lists;
+	
+	protected override async Task OnInitializedAsync()
+	{
+		_lists = await MyListProvider.GetLists();
+	}
+}

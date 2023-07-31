@@ -7,6 +7,9 @@
 	<meta name="description" content="App using Blazor and Azure that works offline or online and stores your data locally with an option to save to the cloud." />
 	<title>📃blistr.app</title>
 	<base href="/" />
+	
+	<!-- <link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css"> -->
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.classless.min.css" />
 	<link href="css/app.css" rel="stylesheet" />
 	<link href="manifest.webmanifest" rel="manifest" />
 	<script src="scripts/blistr.loading.js"></script>
@@ -14,23 +17,22 @@
 	<link href="BlazorClientStd.styles.css" rel="stylesheet" /> -->
 </head>
 
-<body>
+<body data-auto-start="start-blazor">
 	<div id="app">
-		<main>
+		<header>
 			<h1 tabindex="-1">blistr</h1>
-
+		</header>
+		<main>
 			<h2>Blazor List Manager</h2>
-			<article class="start-blazor">
+			<article>
 				<p>
 					This is a fast, responsive <a href="https://blazor.net">Blazor</a> app hosted on Azure Static Web Apps.
 					It demonstrates techniques for fast loading, responsive UI, and offline support.
 					You can view the PageSpeed Insights report here: <a href="https://developers.google.com/speed/pagespeed/insights/?url=https%3A%2F%2Fblistr.app%2F&tab=mobile">PageSpeed Insights</a>.
 					The source code is open source and available on <a href="https://github.com/SQL-MisterMagoo/ListManager">GitHub</a>.
 				</p>
-				<form>
-					<label for="userid">Choose a name </label><input id="userid" type="text" autofocus class="start-blazor" />
-					<button id="btnStart" class="action">Start</button>
-				</form>
+				<!-- <label for="userid">Choose a name </label><input id="userid" type="text" autofocus class="start-blazor" /> -->
+				<a id="btnStart" class="action" href="#">Start</a>
 			</article>
 		</main>
 		<footer>
@@ -44,7 +46,7 @@
 		<a href="#" class="dismiss">🗙</a>
 	</div>
 
-	<script src="_framework/blazor.webassembly.js" autostart="false" async="async"></script>
+	<script src="_framework/blazor.webassembly.js" autostart="false"></script>
 	<script async="async">navigator.serviceWorker.register('service-worker.js');</script>
 </body>
 </html>

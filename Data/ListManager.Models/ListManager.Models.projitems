@@ -9,10 +9,13 @@
     <Import_RootNamespace>ListManager.Models</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <Folder Include="$(MSBuildThisFileDirectory)Lists\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Models\Lists\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Models\" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="$(MSBuildThisFileDirectory)lists\List.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)lists\ListItem.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Lists\ListOfItems.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Lists\ListItem.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Providers\BrowserLocalListProvider.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Providers\ListProvider.cs" />
   </ItemGroup>
 </Project>

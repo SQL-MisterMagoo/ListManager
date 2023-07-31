@@ -1,9 +1,6 @@
 ﻿@page "/"
 @inject IJSRuntime JS
 @inject IConfiguration Configuration
-<h1>
-	@Configuration["app:name"]
-</h1>
 
 <h2>@Configuration["app:description"]</h2>
 <article>
@@ -13,28 +10,6 @@
 		You can view the PageSpeed Insights report here: <a href="https://developers.google.com/speed/pagespeed/insights/?url=https%3A%2F%2Fblistr.app%2F&tab=mobile">PageSpeed Insights</a>.
 		The source code is open source and available on <a href="https://github.com/SQL-MisterMagoo/ListManager">GitHub</a>.
 	</p>
-	<form>
-		<label for="userid">Choose a name </label><input id="userid" type="text" @bind=value autofocus class="start-blazor" />
-		<button id="btnStart" class="action" @onclick="Clicked">Start</button>
-	</form>
+	<a id="btnStart" class="action" href="/Lists">Start</a>
 </article>
 
-@code {
-	string value;
-	void Clicked()
-	{
-		if (JS is IJSInProcessRuntime jSIn)
-		{
-			jSIn.InvokeVoid("alert", $"Hello {value}");
-		}
-	}
-	protected override void OnAfterRender(bool firstRender)
-	{
-		if (firstRender && JS is IJSInProcessRuntime jSIn)
-		{
-			value = jSIn.Invoke<string>("localStorage.getItem", "userid");
-			jSIn.InvokeVoid("localStorage.setItem", "userid", "");
-			StateHasChanged();
-		}
-	}
-}

@@ -14,7 +14,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorClientStd", "Clients\
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{078BF27E-E379-4EFE-AF49-3DD7EE04EE3F}"
 EndProject
-Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "ListManager.Models", "Data\ListManager.Models\ListManager.Models.shproj", "{87E08CFB-BA83-4F5A-B054-C4DA6FA43031}"
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "ListManager", "Data\ListManager.Models\ListManager.shproj", "{87E08CFB-BA83-4F5A-B054-C4DA6FA43031}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
